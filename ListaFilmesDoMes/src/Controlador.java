@@ -13,7 +13,7 @@ public class Controlador {
 
     public void iniciar(){
         String comando;
-        do{
+            do{
             System.out.println("Digite um comando (adicionar filme, remover filme, listar filmes, sair): ");
             comando = scanner.nextLine();
             switch (comando) {
@@ -24,22 +24,27 @@ public class Controlador {
                     break;
 
                 case "remover filme", "remover":
-                    System.out.println("Digite o nome do Filme a ser removido: ");
-                    String filmeString = scanner.nextLine();
-                    modelo.removerFilme(filmeString);
-                    break;
+                    System.out.println("Digite o nome do filme que deseja remover:");
+                    String tituloParaRemover = scanner.nextLine();
+                    boolean removido = modelo.removerFilme(tituloParaRemover);
+                        if (removido) {
+                            System.out.println("Filme '" + tituloParaRemover + "' removido com sucesso.");
+                        } else {
+                            System.out.println("Filme '" + tituloParaRemover + "' não encontrado.");
+                        }
+                break;
 
                 case "listar filmes", "listar", "lista":
                     visao.exibirFilmes(modelo.obterFilmes(), modelo.obterQuantidade());
-                    break;
+                break;
 
                 case "sair":
                     System.out.println("Saindo...");
-                    break;
+                break;
             
                 default:
                     System.out.println("Comando desconhecido");
-                    break;
+                break;
             }
         }while (!comando.equals("sair"));
     }
